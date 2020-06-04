@@ -1,0 +1,63 @@
+<div>
+  <h2 class="text-center">Add New Product</h2>
+  <form #f="ngForm" (ngSubmit)="addNewProduct(f)">
+    <input
+      type="text"
+      class="form-control"
+      name="name"
+      ngModel
+      placeholder="Put Product Name"
+      required
+    /><br />
+    <input
+      type="number"
+      class="form-control"
+      name="price"
+      ngModel
+      placeholder="Put Product Price"
+      required
+    /><br />
+
+    <input type="file" ngModel name="image" required #image /><br /><br />
+    <input
+      type="submit"
+      value="add"
+      class="btn btn-primary"
+      [disabled]="f.invalid"
+    />
+  </form>
+</div>
+
+<section class="edit">
+  <h2 class="text-center">Products Dashboard</h2>
+  <br />
+  <table class="table table-striped text-white table-dark">
+    <thead>
+      <td>Product Name</td>
+      <td>Product Price</td>
+      <td>Options</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of ProductsArr; index as i">
+        <td>{{ product.Name }}</td>
+        <td>
+          <input
+            type="number"
+            placeholder="$$"
+            [(ngModel)]="product.Price"
+            min="1"
+          />
+          $
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="updateProductPrice(i)">
+            Update
+          </button>
+          <button class="btn btn-danger" (click)="deleteProduct(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
